@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "ed3f793e-901a-4ab1-bc21-ce40660b869c",
+		"name": "smoketest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26295377"
+	},
+	"item": [
+		{
+			"name": "postPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"pm.collectionVariables.set(\"petId\", response.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 200,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Elephant\"\r\n  },\r\n  \"name\": \"Happy\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{petStoreUrl}}/pet",
+					"host": [
+						"{{petStoreUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPetById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{petStoreUrl}}/pet/:id",
+					"host": [
+						"{{petStoreUrl}}"
+					],
+					"path": [
+						"pet",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{petId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 200,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"Elephant\"\r\n  },\r\n  \"name\": \"Sad\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{petStoreUrl}}/pet",
+					"host": [
+						"{{petStoreUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{petStoreUrl}}/pet/:id",
+					"host": [
+						"{{petStoreUrl}}"
+					],
+					"path": [
+						"pet",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{petId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPetByIdAfterDeleting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{petStoreUrl}}/pet/:id",
+					"host": [
+						"{{petStoreUrl}}"
+					],
+					"path": [
+						"pet",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{petId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "petStoreUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "petId",
+			"value": ""
+		}
+	]
+}
